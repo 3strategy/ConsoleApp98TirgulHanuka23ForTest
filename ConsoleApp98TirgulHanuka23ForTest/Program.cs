@@ -249,7 +249,8 @@
         static int SwitchDigits2(int n)
         {
             // if number of digits is odd return the number and exit
-            if (CountDigits(n) % 2 != 0)
+            // the (n < 10) their is no need to call CountDigits
+            if (n < 10 || CountDigits(n) % 2 != 0)
                 return n;
 
             int newN = 0; // the new number 
