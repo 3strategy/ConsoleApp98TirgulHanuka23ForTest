@@ -248,20 +248,18 @@
 
         static int SwitchDigits2(int n)
         {
-            // if number of digits is odd return the number and exit
-            // the (n < 10) their is no need to call CountDigits
-            if (n < 10 || CountDigits(n) % 2 != 0)
-                return n;
-
-            int newN = 0; // the new number 
-            int multiplier = 1; // used to add the new digits to the left
+            int orig = n; // Keep the original number to be able to return it
+            int newN = 0; // The new number 
+            int multiplier = 1; // Used to add the new digits to the left
             while (n > 0)
             {
+                if (n<10)        // This is proof that n had an odd 
+                    return orig; // number of digits.
                 int d1 = n % 10;
                 int d10 = n / 10 % 10;
                 newN = newN + (d1 * 10 + d10) * multiplier;
-                n /= 100; // remove 2 right digits
-                multiplier *= 100; // increase the position of next digits   
+                n /= 100; // Remove 2 right digits
+                multiplier *= 100; // Increase the position of next digits   
             }
             return newN;
         }
