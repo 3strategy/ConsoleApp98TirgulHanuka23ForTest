@@ -49,9 +49,17 @@
             }
         }
         #endregion
-
         #region Q3
+        // For methods that simply return result of expression or have 
+        // single line expression, there is a syntax shortcut using "=>".
+        // For example instead of:
+        //     static int Salary(int h, int s)
+        //     {
+        //        return h * (s >= 5 ? 55 : 45);
+        //     }
+        // We can use the following:
         static int Salary(int h, int s) => h * (s >= 5 ? 55 : 45);
+
         static void MainQ3()
         {
             double count = 0; // make at least 1 of the 2 double
@@ -135,10 +143,12 @@
                          // אולם נתון במפורש שהקלט תקין
 
             }
-            Console.WriteLine($"Best height for men: " + maxHm);
-            Console.WriteLine($"Best height for women: " + maxHf);
-            Console.WriteLine($"Average jump height is: {sum / count}");
-
+            if (count > 0) // avoid division by 0.
+            {
+                Console.WriteLine($"Best height for men: " + maxHm);
+                Console.WriteLine($"Best height for women: " + maxHf);
+                Console.WriteLine($"Average jump height is: {sum / count}");
+            }
         }
         #endregion
         #region Q6
@@ -198,6 +208,7 @@
             }
             return count;
         }
+
         /// <summary>
         /// היפוך סדר הספרות במספר
         /// </summary>
@@ -207,11 +218,12 @@
             int rev = 0;
             while (n > 0)
             {
-                rev = rev * 10 + n % 10; // ספירת כמות הספרות
+                rev = rev * 10 + n % 10; // הוספת הספרה הבאה  
                 n /= 10;
             }
             return rev;
         }
+
         static int SwitchDigits(int n)
         {
             // השאלה הקשה עד כה, ולכן השתמשתי במספר פונקציות
@@ -233,6 +245,26 @@
             }
             return newN;
         }
+
+        static int SwitchDigits2(int n)
+        {
+            // if number of digits is odd return the number and exit
+            if (CountDigits(n) % 2 != 0)
+                return n;
+
+            int newN = 0; // the new number 
+            int multiplier = 1; // used to add the new digits to the left
+            while (n > 0)
+            {
+                int d1 = n % 10;
+                int d10 = n / 10 % 10;
+                newN = newN + (d1 * 10 + d10) * multiplier;
+                n /= 100; // remove 2 right digits
+                multiplier *= 100; // increase the position of next digits   
+            }
+            return newN;
+        }
+
         static void MainQ8()
         {
             Random rnd = new Random();
