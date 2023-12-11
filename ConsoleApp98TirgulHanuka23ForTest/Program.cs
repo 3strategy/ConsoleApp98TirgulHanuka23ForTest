@@ -31,7 +31,25 @@
                 prev1 = cur;
             }
         }
+
+        static void MainQ2v2()
+        {
+            Random rnd = new Random(6);
+
+            int prev1 = rnd.Next(0, 100);  // (הגרלת המספר ה-1 (לא כולל 100
+            int prev2 = rnd.Next(0, 100);  // (הגרלת המספר ה-2 (לא כולל 100
+            int cur;
+            for (int i = 2; i < 30; i++)
+            {
+                cur = rnd.Next(0, 100); //לא כולל 100
+                if (cur == prev1 + prev2) // השוואה לשני הקודמים
+                    Console.WriteLine($"{cur} is the sum of {prev1} and {prev2}");
+                prev2 = prev1; // (גלגול לאחור (שמירת היסטוריה
+                prev1 = cur;
+            }
+        }
         #endregion
+
         #region Q3
         static int Salary(int h, int s) => h * (s >= 5 ? 55 : 45);
         static void MainQ3()
